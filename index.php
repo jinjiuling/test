@@ -227,15 +227,16 @@ myFunction4();
 $data=file_get_contents("https://api.streamsb.com/api/file/list?key=21694wjgkly5z3uxcojdo&page=1&per_page=50");
 $data=json_decode($data, true);
 //print_r($data[result][files][0]);
+$result=$data[result][files];
 for ($i=0;$i<count($data[result][files]);$i++) {
-$cover=$data[result][files][$i][thumbnail];
+$cover=$result[$i][thumbnail];
 $img=str_replace("_t.jpg","_xt.jpg",$cover);
-$link=$data[result][files][$i][link];
+$link=$result[$i][link];
 $link=str_replace("com/","com/e/",$link);
-$update=$data[result][files][$i][uploaded];
-$views=$data[result][files][$i][views];
-//$title=$data[result][files][$i][title];
-$title=iconv("utf-8","iso-8859-1",$data[result][files][$i][title]);
+$update=$result[$i][uploaded];
+$views=$result[$i][views];
+//$title=$result[$i][title];
+$title=iconv("utf-8","iso-8859-1",$result[$i][title]);
 
 echo "<div class=\"posts\" id=\"root1\"><div id=\"root\" class=\"post\"style=\"border-radius: 8px;border: 0px solid #e0c8d0;overflow: hidden;\">";
 echo "<img style=\"display:block;\" class=\"picture\" src=\"https://p.pstatp.com/origin/pgc-image/470e9fe766dd44dba16d4f75600881ed\">";
@@ -264,7 +265,7 @@ echo "</div></div></div></div>";
                      <i class="fa fa-flag"></i>
 
                     <a style="color:#000;">视频∶</a>
-                    <span title="视频"><?php echo count($data[result][files]); ?></span>
+                    <span title="视频"><?php echo count($result); ?></span>
                 </div>
      
 				</div>
